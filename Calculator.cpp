@@ -40,10 +40,10 @@ struct Stack {
 	}
 
 	~Stack(){
-		for(Node *next = head; next;){
-			Node *node = next;
-			next = next->next;
-			delete node;
+		for(Node *putback = tail; putback;){
+			Node *queue = putback;
+			putback = putback->prev;
+			delete queue;
 		}
 	}
 };
