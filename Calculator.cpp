@@ -2,6 +2,8 @@
 #include "Token.h"
 #include "stdlib.h"
 #include "stdio.h"
+#include "signal.h"
+
 namespace jay {
 template<class T>
 struct Stack {
@@ -30,7 +32,10 @@ struct Stack {
 	T pop(){
 		T item = peek();
 		Node *node = tail->prev;
-		
+		if(tail == 0){
+			fprintf(stderr, "Stack: error when popping\n");
+			raise(SIGABRT);
+		}
 		delete tail;
 		tail = node;
 		return item;
@@ -49,7 +54,7 @@ struct Stack {
 };
 Token *tokens = 0;
 
-void test(){
+void testStack(){
 	Stack<const byte*> *stack = new Stack<const byte*>();
 	stack->push("test");
 	stack->push("lkjhg");
@@ -58,7 +63,7 @@ void test(){
 }
 
 Calculator::Calculator(){
-	test();
+	testStack();
 }
 
 } // jay
