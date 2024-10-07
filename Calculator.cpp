@@ -68,11 +68,15 @@ void init(){
 	tokens = new Token[cap];
 }
 
-Calculator<const byte*>::Calculator<const byte*>(){
+Calculator::Calculator(void){
 	size = 0;
 	cap = 32;
 	testStack();
 	init();
+}
+
+const byte *Calculator::eval(const byte *param){
+	return 0;
 }
 
 Calculator::~Calculator(){
