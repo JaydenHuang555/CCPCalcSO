@@ -1,11 +1,11 @@
 #pragma once
 #include "defs.h"
 namespace jay {
+template<class K>
 class Calculator {
 public:
 	Calculator();
-	void init();
-	Calculator &digest(const byte*);	
-	double evald();
+	~Calculator();
+	K eval();
 };
 } // jay

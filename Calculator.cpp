@@ -53,17 +53,30 @@ struct Stack {
 	}
 };
 Token *tokens = 0;
-
+Token *digested = 0;
+unsigned long size;
+unsigned long cap;
 void testStack(){
 	Stack<const byte*> *stack = new Stack<const byte*>();
 	stack->push("test");
 	stack->push("lkjhg");
-	while(!stack->isEmpty()) printf("%s\n", stack->pop());
+	while(!stack->isEmpty()) stack->pop();
 	delete stack;
 }
 
-Calculator::Calculator(){
+void init(){
+	tokens = new Token[cap];
+}
+
+Calculator<const byte*>::Calculator<const byte*>(){
+	size = 0;
+	cap = 32;
 	testStack();
+	init();
+}
+
+Calculator::~Calculator(){
+	delete tokens;
 }
 
 } // jay
