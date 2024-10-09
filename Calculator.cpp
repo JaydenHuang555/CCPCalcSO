@@ -3,6 +3,8 @@
 #include "stdlib.h"
 #include "stdio.h"
 #include "signal.h"
+#include "ArrayList.h"
+#include "String.h"
 
 namespace jay {
 template<class T>
@@ -53,7 +55,7 @@ struct Stack {
 	}
 };
 Token *tokens = 0;
-Token *digested = 0;
+ArrayList<Token> *digested;
 unsigned long size;
 unsigned long cap;
 void testStack(){
@@ -66,6 +68,26 @@ void testStack(){
 
 void init(){
 	tokens = new Token[cap];
+	digested = new ArrayList<Token>();
+}
+
+unsigned long strLen(const byte *p1){
+	byte *c;
+	for(c = (byte*)p1;*c;) c++;
+	return (unsigned long)(c - p1);
+}
+
+// returns precedence of given op
+unsigned int getPrec(byte c){
+	switch(c){
+		case '+':
+		case '-':
+			return 1;
+		case '*':
+		case '/':
+				return 2;
+		default: return 0;
+	}
 }
 
 Calculator::Calculator(void){
@@ -76,11 +98,17 @@ Calculator::Calculator(void){
 }
 
 const byte *Calculator::eval(const byte *param){
+	String *buildNum = new String();
+	for(int i = 0; i < strLen(param); i++){
+		
+	}
+	if((*buildNum)[0]) delete buildNum;
 	return 0;
 }
 
 Calculator::~Calculator(){
 	delete tokens;
+	delete digested;
 }
 
 } // jay
